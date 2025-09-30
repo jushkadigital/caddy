@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+  caddy:
+    image: caddy:latest # Imagen oficial de Caddy
+    restart: unless-stopped
+    ports:
+      # Puerto 80 para HTTP y desafío ACME (necesario para HTTPS)
+      - "80:80"
+      # Puerto 443 para HTTPS
+      - "443:443"
+    volumes:
+      # 1. Monta el Caddyfile de tu host en la configuración del contenedor
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      # 2. Volumen persistente para datos (certificados TLS, etc.)
+      - caddy_data:/data
+      # 3. Monta tu carpeta de sitio (opcional, si sirves estáticos)
+      - ./site:/srv
+      # 4. Volumen persistente para configuración de Caddy
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:
