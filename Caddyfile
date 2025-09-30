@@ -5,14 +5,5 @@ cms.patarutera.pe, www.cms.patarutera.pe {
     # 1. Configuración de archivos estáticos
     # Esto apunta a la carpeta /srv dentro del contenedor.
     # Usaremos esto como la ubicación de tu CMS.
-    root * /srv
-    file_server
-
-    # 2. Manejo de errores (opcional pero recomendado)
-    # Por ejemplo, para mostrar una página 404 personalizada
-    # handle_errors {
-    #     respond "{http.error.status_code} {http.error.status_text}"
-    # }
-
-    # Puedes añadir más directivas aquí según tu CMS (ej. PHP, headers, etc.)
+    reverse_proxy cmspatarutera-payload-1:9000
 }

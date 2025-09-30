@@ -22,3 +22,8 @@ services:
 volumes:
   caddy_data:
   caddy_config:
+
+networks:
+  default:
+    external: true
+    name: proxiable
