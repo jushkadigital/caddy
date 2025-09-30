@@ -5,5 +5,5 @@ cms.patarutera.pe, www.cms.patarutera.pe {
     # 1. Configuración de archivos estáticos
     # Esto apunta a la carpeta /srv dentro del contenedor.
     # Usaremos esto como la ubicación de tu CMS.
-    reverse_proxy cmspatarutera-payload-1:9000
+    reverse_proxy cmspatarutera-payload-1:3000
 }
