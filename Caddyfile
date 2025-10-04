@@ -7,3 +7,7 @@ cms.patarutera.pe, www.cms.patarutera.pe {
     # Usaremos esto como la ubicación de tu CMS.
     reverse_proxy cmspatarutera-payload-1:3000
 }
+
+paymentserver.pdsviajes.com, www.paymentserver.pdsviajes.com {
+    reverse_proxy pasarelabackend-prod-1:8000
+  }
