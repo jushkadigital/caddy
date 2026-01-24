@@ -1,13 +1,33 @@
 cms.patarutera.pe, www.cms.patarutera.pe {
-    # Caddy detectará estos nombres de host y automáticamente
-    # obtendrá los certificados SSL/TLS de Let's Encrypt.
-    
-    # 1. Configuración de archivos estáticos
-    # Esto apunta a la carpeta /srv dentro del contenedor.
-    # Usaremos esto como la ubicación de tu CMS.
-    reverse_proxy cmspatarutera-payload-1:3000
+    encode gzip zstd
+
+    reverse_proxy cmspatarutera-payload-1:3000 {
+        header_up Host {host}
+        header_up X-Real-IP {remote}
+        header_up X-Forwarded-For {remote}
+        header_up X-Forwarded-Proto {scheme}
+    }
 }
 
 paymentserver.pdsviajes.com, www.paymentserver.pdsviajes.com {
-    reverse_proxy pasarelabackend-prod-1:8000
-  }
+    encode gzip zstd
+
+    reverse_proxy pasarelabackend-prod-1:8000 {
+        header_up Host {host}
+        header_up X-Real-IP {remote}
+        header_up X-Forwarded-For {remote}
+        header_up X-Forwarded-Proto {scheme}
+    }
+}
+
+auth.patarutera.pe, www.auth.patarutera.pe {
+    encode gzip zstd
+
+    reverse_proxy quarkus-app-prod:8081 {
+        header_up Host {host}
+        header_up X-Real-IP {remote}
+        header_up X-Forwarded-For {remote}
+        header_up X-Forwarded-Proto {scheme}
+    }
+}
+
