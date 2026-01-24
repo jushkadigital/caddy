@@ -23,6 +23,17 @@ paymentserver.pdsviajes.com, www.paymentserver.pdsviajes.com {
 auth.patarutera.pe, www.auth.patarutera.pe {
     encode gzip zstd
 
+    reverse_proxy keycloak-prod:8080 {
+        header_up Host {host}
+        header_up X-Real-IP {remote}
+        header_up X-Forwarded-For {remote}
+        header_up X-Forwarded-Proto {scheme}
+    }
+}
+
+users.patarutera.pe, www.users.patarutera.pe {
+    encode gzip zstd
+
     reverse_proxy quarkus-app-prod:8081 {
         header_up Host {host}
         header_up X-Real-IP {remote}
