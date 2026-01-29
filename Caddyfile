@@ -47,8 +47,7 @@ users.patarutera.pe, www.users.patarutera.pe {
 commerce.patarutera.pe, www.commerce.patarutera.pe {
     encode gzip zstd
 
-    # Reemplaza 'medusa-backend' con el nombre de tu servicio en docker-compose
-    reverse_proxy medusa-backend:9000 {
+    reverse_proxy medusa-app:9000 {
         header_up Host {host}
         header_up X-Real-IP {remote}
         header_up X-Forwarded-For {remote}
